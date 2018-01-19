@@ -21,7 +21,6 @@ import mainGame.components.ColumnLane;
 import mainGame.components.Combo;
 import mainGame.components.Holdstroke;
 import mainGame.components.Keystroke;
-import mainGame.components.KeystrokeIndicator;
 import mainGame.components.Rectanglu;
 import mainGame.components.Song;
 import mainGame.components.Timing;
@@ -53,7 +52,6 @@ public class GameScreen extends ClickableScreen implements KeyListener, Runnable
 	private HashMap<Keystroke, Visible[]> holdStroke; //The whole hold stroke consisting of 3 components will be accessible by knowing the first stroke here
 	private ArrayList<Visible[]> currentlyHoldingList; //The end strokes that the user is currently holding will be here
 	private boolean[] currentHoldLanes; //The lanes currently being held down will be in this list
-	private KeystrokeIndicator[] indicators; //The keystroke indicators will be in this array
 	
 	private boolean pause; //This boolean will be used to keep track if the game is paused or not
 	private int fallTime; //The single call fall time calculated from BPM will be stored here
@@ -133,7 +131,6 @@ public class GameScreen extends ClickableScreen implements KeyListener, Runnable
 		//CREATE THE LANES
 		//THIS ALREADY MAKES THEM TRANSPARENT TO A SENSE
 		addColumnLanes(viewObjects);
-		addKeystrokeIndicator(viewObjects);
 		
 		/*
 		Keystroke leftKey = new Keystroke(100, 75, "resources/arrows/darrow.png");
@@ -161,31 +158,7 @@ public class GameScreen extends ClickableScreen implements KeyListener, Runnable
 		
 		
 	}
-	
-	public void addKeystrokeIndicator(List<Visible> viewObjects) {
-		indicators = new KeystrokeIndicator[4];
-		
-		KeystrokeIndicator left = new KeystrokeIndicator(arrowX[0] - 3, columnY + columnHeight, arrowPaths[0]);
-		left.setAlpha((float)0.3);
-		indicators[0] = left;
-		viewObjects.add(left);
-		
-		KeystrokeIndicator leftC = new KeystrokeIndicator(arrowX[1] - 3, columnY + columnHeight, arrowPaths[1]);
-		leftC.setAlpha((float)0.3);
-		indicators[1] = leftC;
-		viewObjects.add(leftC);
-		
-		KeystrokeIndicator rightC = new KeystrokeIndicator(arrowX[2] - 3, columnY + columnHeight, arrowPaths[2]);
-		rightC.setAlpha((float)0.3);
-		indicators[2] = rightC;
-		viewObjects.add(rightC);
-		
-		KeystrokeIndicator right = new KeystrokeIndicator(arrowX[3] - 3, columnY + columnHeight, arrowPaths[3]);
-		right.setAlpha((float)0.3);
-		indicators[3] = right;
-		viewObjects.add(right);
-	}
-	
+
 	/**
 	 * This method will add 4 visuals that will represent the lanes that the strokes will drop down through
 	 * 
