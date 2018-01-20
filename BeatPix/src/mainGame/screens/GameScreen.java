@@ -398,8 +398,7 @@ public class GameScreen extends ClickableScreen implements KeyListener, Runnable
 			} 
 		}
 		if(!correctStroke && madeLegalStroke(e)) {
-			//CALCULATE MISS ACCURACY HERE PLACEHOLDER 
-			
+
 			Keystroke cStroke = strokes.get(0);
 			removeStroke(cStroke);
 			cStroke.cancelFall();
