@@ -493,7 +493,7 @@ public class GameScreen extends ClickableScreen implements KeyListener, Runnable
 		acc=acc/totalHit;
 		accuracy=acc*100;
 		visual.setText(accuracy+"%");
-		System.out.println(accuracy);
+		System.out.println((float)Math.round(accuracy*100)/100);
 		
 	}
 
