@@ -71,9 +71,11 @@ public class GameScreen extends ClickableScreen implements KeyListener, Runnable
 	//Steven
 	private Timing timing;
 	private TextArea visual;
-	private Accuracy accuracy;
-	private int totalAcc;
+	private Accuracy accDisplay;
+	private float[] totalAcc;
+	private double accuracy;
 	private Combo combo;
+	
 	//Steven
 	
 	public GameScreen(int width, int height, Song song) {
@@ -92,7 +94,12 @@ public class GameScreen extends ClickableScreen implements KeyListener, Runnable
 		
 		updateKeyStrokes(KeyEvent.VK_D, KeyEvent.VK_F, KeyEvent.VK_J, KeyEvent.VK_K);
 		
-		totalAcc=100;
+		totalAcc=new float[beats.size()];
+		for(int i=0;i<totalAcc.length;i++) {
+			totalAcc[i]=-1;
+		}
+		
+		accuracy=100;
 		
 		Thread screen = new Thread(this);
 		screen.start();
@@ -149,12 +156,14 @@ public class GameScreen extends ClickableScreen implements KeyListener, Runnable
 		timing=new Timing(175,300, 128, 128);
 		viewObjects.add(timing);
 		timing.update();
-		accuracy=new Accuracy(600,30,400,400);
-		viewObjects.add(accuracy);
-		accuracy.update();
+		accDisplay=new Accuracy(600,30,400,400);
+		viewObjects.add(accDisplay);
+		accDisplay.update();
 		combo=new Combo(275,300, 128, 128);
 		viewObjects.add(combo);
 		combo.update();
+		visual=new TextArea(275,500, 128, 128, "");
+		visual.setText(accuracy+"%");
 		
 		
 	}
@@ -466,13 +475,26 @@ public class GameScreen extends ClickableScreen implements KeyListener, Runnable
 	}
 	
 	public void calcAcc(double timing) {
-		int amtOfNotes=0;
-		for(int i=0;i<beats.size();i++) {
-			amtOfNotes+=beats.get(i).length;
+		int totalHit=0;
+		for(int i=0;i<totalAcc.length;i++) {
+			if(totalAcc[i]==-1) {
+				totalAcc[i]=(float) timing;
+				break;
+			}
 		}
-		double indAcc=100/amtOfNotes;
-		totalAcc-=(indAcc*(1-timing));
-		accuracy.setAcc(totalAcc);
+		double acc=0;
+		for(double a:totalAcc) {
+			if(a!=-1) {
+				totalHit++;
+				acc+=a;
+			}
+			System.out.println(a);
+		}
+		acc=acc/totalHit;
+		accuracy=acc*100;
+		visual.setText(accuracy+"%");
+		System.out.println(accuracy);
+		
 	}
 
 	/**
