@@ -111,6 +111,7 @@ public class GameScreen extends ResizableScreen implements Runnable {
 	private Scoring gamescore;
 	private float score =0;
 	private float health = 100;
+	int ra;
 	private CustomText displayScore;
 	//tyler
 	public GameScreen(int width, int height, Song song) {
@@ -724,17 +725,29 @@ public class GameScreen extends ResizableScreen implements Runnable {
 		}
 		int tScore = (int)Math.round(score);
 		String display = String.valueOf(tScore);
+		//display = 300;
 		
-		int[] scoreA = {0,0,0,0,0,0};
+		int[] scoreA = {0,0,0,0,0,0,0,0,0};
+
 		for(int i = 0; i<display.length();i++) {
 		
-			scoreA[scoreA.length-i-1] = display.charAt(i);
+			ra = Integer.parseInt(display.substring((display.length()-1)-i,(display.length())-i ));
 			
-		} 
+			System.out.println(ra);
+			//System.out.println(scoreA.length-i);
+			scoreA[scoreA.length-i-1] = ra;
+			
+		}
 	//	scoreA[scoreA.length-2] = 2;
 		//scoreA[scoreA.length-2] = display.charAt();
-	//	System.out.println(Arrays.toString(scoreA));
-		//System.out.println(display.charAt(0));
+		//System.out.println(Arrays.toString(scoreA));
+		ArrayList<Integer> intList = new ArrayList<Integer>();
+		for (int i : scoreA)
+		{
+		    intList.add(i);
+		    
+		}
+	//	System.out.println(Arrays.deepToString(intList));
 		displayScore.setText(display);
 	} 
 
