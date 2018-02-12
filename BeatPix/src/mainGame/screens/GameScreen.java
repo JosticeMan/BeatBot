@@ -747,6 +747,10 @@ public class GameScreen extends ResizableScreen implements Runnable {
 		    intList.add(i);
 		    
 		}
+		/*for (int i : intList) {
+			System.out.println(i);
+		}*/
+		
 	//	System.out.println(Arrays.deepToString(intList));
 		displayScore.setText(display);
 	} 
