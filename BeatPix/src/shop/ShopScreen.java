@@ -110,12 +110,10 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 		credits = getCredits();
 		//Daniel components~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
-	//	songs = new ArrayList<Song>();
 		buttons = new ArrayList<ImageButton>();
 		customText = new ArrayList<CustomText>();
 		multiText = new ArrayList<MultiLineCustomText>();
 		
-	//	songs.add(new Song("resources//DreadnoughtMastermind(xi+nora2r).csv"));
 
 		//graphics
 			
@@ -442,72 +440,51 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 		ArrayList<Integer> a = new ArrayList<Integer>();
 		int temp = 0;
 		String title = "";
+		boolean isLast = false;
+		boolean check = false;
+		// creates ints for the amount of difficulties per song so I know how many to unlock
 		for (int i = 0; i < MainGUI.test.mySongs.size(); i++)
 		{
+			int b = (i+2);
 			title = MainGUI.test.mySongs.get(i).getTitle();
-			if (i+1 < MainGUI.test.mySongs.size())
+			if (b < MainGUI.test.mySongs.size())
 			{		
 				if (title.equals(MainGUI.test.mySongs.get(i+1).getTitle().toLowerCase()))
 				{
 					temp++;
 				}	
 				else
-				{
+				{					
 					a.add(temp);
 					temp = 0;
 				}
 			}
+		
 		}
 		
+		// unlocks the song if the title corresponds
 		for (int i = 0; i<MainGUI.test.mySongs.size(); i++)
 		{
-			if (buttons.get(idx).getSong().toLowerCase().equals(MainGUI.test.mySongs.get(i).getTitle().toLowerCase()))
+			int temp1 = MainGUI.test.mySongs.size()-i;
+			if (temp1 > 3)
 			{
-				MainGUI.test.mySongs.get(i+a.get(i)).setUnlock(true);
+				if (buttons.get(idx).getSong().toLowerCase().equals(MainGUI.test.mySongs.get(i).getTitle().toLowerCase()))
+				{
+						System.out.println((i+a.get(i)));
+						MainGUI.test.mySongs.get(i+a.get(i)).setUnlock(true);
+				}
+			}
+			else
+			{
+				MainGUI.test.mySongs.get(MainGUI.test.mySongs.size()-3).setUnlock(true);
+				MainGUI.test.mySongs.get(MainGUI.test.mySongs.size()-2).setUnlock(true);
+				MainGUI.test.mySongs.get(MainGUI.test.mySongs.size()-1).setUnlock(true);
 			}
 		}
-	/*	
-		if (buttons.get(idx).getSong().equals("Adrenaline"))
-		{
-			for (int i = 0; i < 4; i++)
-			MainGUI.test.mySongs.get(i).setUnlock(true);
-		}
-		
-		if (buttons.get(idx).getSong().equals("Blow Out"))
-		{
-			for (int i = 4; i < 8; i++)
-			MainGUI.test.mySongs.get(i).setUnlock(true);
-		}
-		
-		if (buttons.get(idx).getSong().equals("Carribean"))
-		{
-			MainGUI.test.mySongs.get(9).setUnlock(true);
-		}
-		
-		if (buttons.get(idx).getSong().equals("Summer Vibes"))
-		{
-			MainGUI.test.mySongs.get(10).setUnlock(true);
-		}
-		
-		if (buttons.get(idx).getSong().equals("Waiting for Love"))
-		{
-			MainGUI.test.mySongs.get(10+filler).setUnlock(true);
-		}
-		
-		if (buttons.get(idx).getSong().equals("Fairy Tail"))
-		{
-			MainGUI.test.mySongs.get(11+filler).setUnlock(true);
-		}
-		
-		if (buttons.get(idx).getSong().equals("One Piece"))
-		{
-			MainGUI.test.mySongs.get(12+filler).setUnlock(true);
-		}
-	*/	
+
 		scroll.remove(clickedButton);				
 		buttons.remove(clickedButton);
 		scroll.remove(customText.get(idx));
-	//	multiText.get(idx).removeFromScreen();
 		customText.remove(idx);
 		scroll.update();
 		
@@ -523,51 +500,6 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 			}
 			scroll.update();
 		}
-		
-		
-	
-		
-		
-	//	ArrayList<Song> songs = MainGUI.test.mySongs;
-	/*			
-		if (idx == 0 || idx == 1 || idx == 8 || idx == 10)
-		{
-			for (int i = idx*4; i < ((idx*4)+4); i++)
-			{
-				MainGUI.test.mySongs.get(i).setUnlock(true);
-			}
-		}
-	*/
-
-	/*	
-		if (idx == 2)
-		{
-			MainGUI.test.mySongs.get(8).setUnlock(true);
-		}
-		
-		if (idx == 3)
-		{
-			for (int i = 0; i < 3; i++)
-			{
-				MainGUI.test.mySongs.get(9+i).setUnlock(true);
-			}
-		}
-		
-		if (idx == 4)
-		{
-			MainGUI.test.mySongs.get(11).setUnlock(true);
-		}
-		
-		if (idx == 5)
-		{
-			MainGUI.test.mySongs.get(12).setUnlock(true);
-		}
-		
-		if (idx == 6)
-		{
-			MainGUI.test.mySongs.get(13).setUnlock(true);
-		}
-	*/	
 		
 		
 	}
