@@ -31,7 +31,7 @@ public class ShopScreenKevin2 extends FullFunctionScreen {
 		images = new ArrayList<ImageButton>();
 		imageNames = new String[] {"resources/sprites/redGuy.png", "resources/sprites/greenGuy.png", "resources/sprites/whiteGuy.png"};
 		for(int i = 0; i < imageNames.length; i ++) {
-			images.add(new ImageButton(100, (100*i)+50, 200, 300, imageNames[i], null, null));
+			images.add(new ImageButton(100, (100*i)+50, 200, 300, imageNames[i], null));
 		}
 		createIntList(3);
 		for(int i=0; i < 3; i++){ 
