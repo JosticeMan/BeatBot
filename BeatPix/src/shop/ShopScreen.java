@@ -71,12 +71,13 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 	
 	//Kevin Fields-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	private ArrayList<Button> buttonList;
-	private ArrayList <Button> confirmButton;
+	private ArrayList<ImageButton> buttonList;
+	private Button confirmButton;
 	private ArrayList<Button> yesButton;
 	private ArrayList<Integer> indexList;
 	private String[] imageNames;
 	private ArrayList<ImageButton> images;
+	private ArrayList<CustomText> skinText;
 	
 	private Graphic border; //for the text
 	private Graphic border2; //for the unlock
@@ -96,8 +97,10 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 	private CustomText unlockedText;
 	private CustomText notEnough;
 	private CustomText pesos;
+	private CustomText skinBanner;
 	
 	private Graphic backBorder;
+	private Graphic textBorderK;
 	
 
 	public ShopScreen(int width, int height) 
@@ -317,18 +320,19 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 		//Kevin Components------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		
 		//
-		buttonList = new ArrayList<Button>();
+		buttonList = new ArrayList<ImageButton>();
 		yesButton = new ArrayList<Button>();
-		confirmButton = new ArrayList<Button>();
 		indexList = new ArrayList<Integer>();
 		images = new ArrayList<ImageButton>();
+		skinText = new ArrayList<CustomText>();
 		
 		back = new CustomText(750, 60, 95, 50, "Back", true);
 		okayK = new CustomText(463, 277, 50, 30,"Ok",true);
 		yesK = new CustomText(405,405,50,75,"Yes", true);
 		noK = new CustomText(507,405,45,50,"No", false);
-		notEnough = new CustomText(363,200,260,260, "Not Enough",true);
-		pesos  = new CustomText(372,240,246,246, "Credits",true);
+		notEnough = new CustomText(363,190,260,260, "Not Enough",true);
+		pesos  = new CustomText(372,230,246,246, "Credits",false);
+		skinBanner = new CustomText(655,135,200,150,"Skins",true);
 		
 		imageNames = new String[] {"resources/sprites/redGuy.png", "resources/sprites/greenGuy.png", "resources/sprites/whiteGuy.png"};
 		for(int i = 0; i < imageNames.length; i ++) {
@@ -348,31 +352,40 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 				setThings1Vis(false);
 				setAllYesButVisFalse();
 				setThings2Vis(false);
-				setAllConfButVisFalse();
+				setConfirmVis(false);
+				setThings3Vis(false);
 				enableButton(true);
 			
 			}
 		});
 		
 		//create the panel 
-		charScroll = new ScrollablePane(this, 650, 100, 250, 400);
+		charScroll = new ScrollablePane(this, 650, 195, 220, 260);	
+		charScroll.setBackground(new Color(0,0,0));
 		charScroll.setBorderWidth(3);
 		
 		//create the list of Buttons and add it to panel
 		for(int i=0; i < numChars; i++){ 
 			//got the index number
 			final int x = i;
-			buttonList.add(new Button(5,30*i,100,25,"Skin "+ (i + 1), new Action() {
-				int j = x;
+			skinText.add(new CustomText(680, (52*i)+205, 190, 200, "Skin "+(i+1), false));
+			ImageButton b = new ImageButton(0,(i*52)+5,220,70,"resources\\ui\\buttons\\buttonwithrivet.png","");
+			b.setAction(new Action() 
+			{
+				
 				@Override
-				public void act() {
-					MainGUI.character.unlock(j);
+				public void act() 
+				{
+					int j = x;
 					setThings1Vis(true);
 					setYesButVisExceptThis(j);
 					index = indexList.indexOf(j);
 					enableButton(false);
 				}
-			}));
+			});
+			
+			b.setEnabled(true);
+			buttonList.add(b);
 			charScroll.addObject(buttonList.get(i));
 		}
 		
@@ -384,46 +397,36 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 				@Override
 				public void act() {
 					// i guess to have the images, and set the a boolean to true and a textfield says unlock
-					 setThings2Vis(true);
-					 setThings1Vis(false);
-					 setAllYesButVisFalse();
-					 setConfButVisExceptThis(j);
-					 
-						
-				}
-			}));
-		}
-		//create arrayList of confirmButtons
-		for(int l = 0; l < numChars; l ++) {
-			final int y = l;
-			confirmButton.add(new Button(460, 270, 50, 30, "", Color.GRAY, new Action() {
-				int a = y;
-				@Override
-				public void act() {
-					setThings2Vis(false);
-					setAllConfButVisFalse();
-					for (int i = index; i < buttonList.size(); i++)
-					{
-						if (buttonList.get(i).getY() != 0)
-						{
-							buttonList.get(i).move(buttonList.get(i).getX(), (buttonList.get(i).getY()-30), 10);
-							charScroll.update();
-						}
-
-					}
-					charScroll.remove(buttonList.get(a));
-					charScroll.update();
-					indexList.remove(index);
-					enableButton(true);
 					if(credits - 1000 > 0 ) {
+						for (int i = index; i < buttonList.size(); i++){
+							if ((buttonList.get(i).getY() >= 50)){
+								buttonList.get(i).move(buttonList.get(i).getX(), (buttonList.get(i).getY()-50), 10);
+								charScroll.update();
+								skinText.get(i).move(skinText.get(i).getX(), (skinText.get(i).getY()-50), 10);
+							}
+						}
+						setThings2Vis(true);
+						setThings1Vis(false);
+						setAllYesButVisFalse();
+						setConfirmVis(true);
+						charScroll.remove(buttonList.get(j));
+						skinText.get(j).setVisible(false);
+						charScroll.update();
+						indexList.remove(index);
+						MainGUI.character.unlock(j);
 						credits = credits - 1000;
 						credit.setText("Credits: "+ credits);
-						credit.update();						
+						credit.update();
 					}
 					else {
-						setThings3Vis(false);
+						setThings1Vis(false);
+						setAllYesButVisFalse();
+						setThings3Vis(true);
+						setConfirmVis(true);
 						
 					}
+					 
+						
 				}
 			}));
 		}
@@ -431,7 +434,7 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 		 //create all the things 
 		 border2 = new Graphic(337, 180, 305,305,"resources//shop//TransparentButtonB.png");
 		 unlockedText = new CustomText(390, 210, 200, 370, "UnLocked",false);
-		 
+		 textBorderK =  new Graphic(340,150,305,435,"resources//shop//TransparentButtonB.png");
 		 
 		 border = new Graphic(380, 80, 230, 430, "resources//TransparentButtonC.png");
 		 textKev = new CustomText(390, 110, 200, 370, "Unlock" ,true);
@@ -445,37 +448,49 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 				 enableButton(true);
 			}
 		});
-		 
+		confirmButton = new Button(460, 270, 50, 30, "", Color.GRAY, new Action() {
+			
+			@Override
+			public void act() {
+				setThings2Vis(false);
+				setConfirmVis(false);
+				enableButton(true);
+				setThings3Vis(false);
+			}
+		});
 		 
 		 //visible all the things
 		 setThings1Vis(false);
 		 setAllYesButVisFalse();
 		 setThings2Vis(false);
-		 setAllConfButVisFalse();
+		 setConfirmVis(false);
 		 setThings3Vis(false);
 		 
 		
 		//add the objects
+		viewObjects.add(skinBanner);
 		viewObjects.add(backButton);
 		viewObjects.add(backBorder);
 		viewObjects.add(border);
 		viewObjects.add(border2);
+		viewObjects.add(textBorderK);
 		viewObjects.add(textKev);
 		charScroll.update();
 		viewObjects.add(charScroll);
 		viewObjects.add(noButton);
 		for(int a = 0; a < numChars; a++) {
-			viewObjects.add(confirmButton.get(a));
 			viewObjects.add(images.get(a));
 			viewObjects.add(yesButton.get(a));
+			viewObjects.add(skinText.get(a));
 		}
 		viewObjects.add(unlockedText);
 		viewObjects.add(back);
 		viewObjects.add(yesK);
 		viewObjects.add(noK);
-		viewObjects.add(okayK);
 		viewObjects.add(notEnough);
 		viewObjects.add(pesos);
+		viewObjects.add(confirmButton);
+		viewObjects.add(okayK);
 		
 	}	
 	//daniel methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -643,16 +658,15 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 	public void setThings2Vis(boolean b) {
 		 border2.setVisible(b);
 		 unlockedText.setVisible(b);
-		 okayK.setVisible(b);
 	}
+	//this is for the not enough pesos
 	public void setThings3Vis(boolean b) {
-		textBorder.setVisible(b);
+		textBorderK.setVisible(b);
 		notEnough.setVisible(b);
 		pesos.setVisible(b);
-		
 	}
 	
-	 //turn all yesButtons, visibility = false;
+	 //turn all yesButtons with the buttons, visibility = false;
 	public void setAllYesButVisFalse() {
 		for(int i = 0; i < yesButton.size(); i ++) {
 			yesButton.get(i).setVisible(false);
@@ -672,20 +686,11 @@ public class ShopScreen extends FullFunctionScreen implements CreditChanger
 	}
 	
 	 //turn all confirmButtons with the images, visibility = false;
-	public void setAllConfButVisFalse() {
-		for(int i = 0; i < confirmButton.size(); i ++) {
-			confirmButton.get(i).setVisible(false);
-		}
+	public void setConfirmVis(boolean b) {
+		confirmButton.setVisible(b);
+		okayK.setVisible(b);
 	}
-	//turn all  confirm button and respected image visibility that are false except for de chosen one
-	public void setConfButVisExceptThis(int i) {
-		for(int x = 0; x < confirmButton.size(); x++) {
-			if(x != i) {
-				confirmButton.get(x).setVisible(false);
-			}
-			confirmButton.get(i).setVisible(true);
-		}
-	}
+		
 	public void enableButton(boolean b) {
 		for(int i = 0; i < buttons.size(); i ++) {
 			buttons.get(i).setEnabled(b);

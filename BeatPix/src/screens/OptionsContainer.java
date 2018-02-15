@@ -554,6 +554,8 @@ public class OptionsContainer{
 				parentScreen.remove(toggleVolume);
 				updateVolumeToggle(); // When clicked it recreates toggleVolume
 				parentScreen.addObject(toggleVolume);
+
+				MainGUI.start.getMs().getMenuSound().updateVolume();
 			}
 		});
 	}

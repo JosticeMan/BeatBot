@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 
 import gui.GUIApplication;
@@ -24,9 +26,9 @@ import screens.components.ImageButton;
 import screens.interfaces.Options;
 
 public class MainMenuScreenG extends FullFunctionScreen implements Options{
-
+//
 	/**Design:
-	 * 
+	 *
 	 * 	-Background - based off where StartScreen left its background
 	 * 				- scroll down similarly to in StartScreen
 	 * 	-Idle Character - will be at the left side of screen
@@ -224,6 +226,13 @@ public class MainMenuScreenG extends FullFunctionScreen implements Options{
 										
 						MainGUI.test.setScreen(MainGUI.select);
 										
+										/*try {
+											MainGUI.test.setScreen(new TempSongSelect(getWidth(), getHeight()));
+										} catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}*/
+						MainGUI.start.getMs().getMenuSound().pause();
 					}
 				});
 				buttons.get(CHARACTER_IDX).setAction(new Action() {
