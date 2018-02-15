@@ -45,7 +45,7 @@ public class MainGUI extends GUIApplication {
 	
 	public static ShopScreen shop;
 	public static LevelSelectG level;
-	public static TempSongSelect select;
+	public static LevelSelectG select;
 	public static OptionsContainer options;
 	public static InformationContainer information;
 	public static CharacterSelectionScreen character;
@@ -167,7 +167,7 @@ public class MainGUI extends GUIApplication {
 		}
 		shop = new ShopScreen(getWidth(),getHeight());
 		try {
-			select = new TempSongSelect(getWidth(), getHeight());
+			select = new LevelSelectG(getWidth(), getHeight());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
