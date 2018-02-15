@@ -25,7 +25,7 @@ import screens.LevelSelectG;
 import screens.interfaces.LevelSelectInterface;
 import screens.interfaces.Options;
 
-public class MainGUI extends GUIApplication implements LevelSelectInterface  {
+public class MainGUI extends GUIApplication {
 
 	/**
 	 * 
