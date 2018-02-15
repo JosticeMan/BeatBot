@@ -51,7 +51,7 @@ public class CharacterSelectionScreen extends FullFunctionScreen implements unlo
 		
 		color = colorArray[0];
 		
-		backGround = new Graphic(0, 0, getWidth(), getHeight(), "resources/charaBG.png");
+		//backGround = new Graphic(0, 0, getWidth(), getHeight(), "resources/charaBG.png");
 		border = new Graphic(212, 180, 305,305,"resources//shop//TransparentButtonB.png");
 		
 		lockedText = new CustomText(265, 210, 200, 370, "Locked",false);
@@ -113,8 +113,7 @@ public class CharacterSelectionScreen extends FullFunctionScreen implements unlo
 		 backButton = new Button(800, 50, 100, 30, "", Color.GRAY, new Action() {
 			@Override
 			public void act() {
-			MainGUI.test.setScreen(MainGUI.mainMenu);
-			MainGUI.mainMenu.changeIdle();
+				ShopKevinGUI.s.setScreen(ShopKevinGUI.s.shop2);
 			}
 		});
 		 
@@ -123,13 +122,13 @@ public class CharacterSelectionScreen extends FullFunctionScreen implements unlo
 			selectImage.get(z).setVisible(false);
 		}
 		selectImage.get(0).setVisible(true);
-		backGround.setVisible(true);
+		//backGround.setVisible(true);
 		border.setVisible(false);
 		lockedText.setVisible(false);
 		selectText.setVisible(false);
 		
 		//viewobjects
-		viewObjects.add(backGround);
+		//viewObjects.add(backGround);
 		viewObjects.add(backButton);
 		viewObjects.add(border);
 		viewObjects.add(lockedText);
