@@ -204,8 +204,11 @@ public class ShipCrash{
 		time = new Timer();
 		time.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
-				if(crashFlash.getAlpha() > 0.05f) {
+				if(crashFlash.getAlpha() > 0.01f) {
 					crashFlash.setAlpha(crashFlash.getAlpha() - 0.03f);
+				}
+				if(crashFlash.getAlpha() < 0.02) {
+					this.cancel();
 				}
 				
 			}

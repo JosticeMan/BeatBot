@@ -149,7 +149,7 @@ public class StartScreenG extends FullFunctionScreen implements MouseListener{
 	}
 	
 	public void scrollIn() {
-		
+		screenPhase = 0;
 		background.setX(0); background.setY(0);
 		
 		time = new Timer();
