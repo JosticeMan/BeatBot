@@ -22,7 +22,6 @@ import screens.StartScreenG;
 import shop.CharacterSelectionScreen;
 import shop.ShopScreen;
 import screens.LevelSelectG;
-import screens.interfaces.LevelSelectInterface;
 import screens.interfaces.Options;
 
 public class MainGUI extends GUIApplication {

@@ -1,12 +1,17 @@
 
 package screens.interfaces;
 
+import gui.components.Button;
+
 public interface LevelSelectInterface {
 
-	public static void moveLeft() {
+	public static void flairButton(Button button) {
 		
 	}
-	public static void moveRight() {
+	public static void updateDisplay() {
+		
+	}
+	public static void updateList() {
 		
 	}
 }

@@ -31,7 +31,7 @@ import screens.interfaces.LevelSelectInterface;
  * 
  * @see highscore.TempSongSelect
  */
-public class LevelSelectG extends FullFunctionScreen {
+public class LevelSelectG extends FullFunctionScreen implements LevelSelectInterface {
 	
 	/**
 	 * 
