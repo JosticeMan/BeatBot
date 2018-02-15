@@ -22,6 +22,10 @@ import mainGame.screens.GameScreen;
 
 public class PlaySong implements JustinPlaySongInterface {
 	
+    /**
+     * Play a given audio file.
+     * Tyler
+     */
 	
     // size of the byte buffer used to read/write the audio stream
     private static final int BUFFER_SIZE = 1024;
@@ -34,17 +38,19 @@ public class PlaySong implements JustinPlaySongInterface {
         cancel = false;
     }
     
-    /**
-     * Play a given audio file.
-     * @param audioFilePath Path of the audio file.
-     * Tyler
-     */
+
     Long audioPosition;
     private Clip audioLine;
     
     /**
-     * @author Justin Yau
      * @author Tyler Ovenden
+     * plays the song through setting the song's path to a clip
+     * thread.sleep used to not have the song play automatically and only be called when used
+     * .open and .start are the methods that queue up and play the actual song
+     * .stop and .flush stop the song
+       @author Justin Yau
+     * pauses the song by setting the position of where the song is currently and pausing it
+     *when resumed the song will be queued back up to the position
      */
     public void play(String audioFilePath) {
         File audioFile = new File(audioFilePath);
@@ -53,9 +59,7 @@ public class PlaySong implements JustinPlaySongInterface {
  
             audioLine = AudioSystem.getClip();
            // System.out.println("Playback started.");
-            
-            byte[] bytesBuffer = new byte[BUFFER_SIZE];
-            int bytesRead = -1;
+
             try {
             
             	while(GameScreen.game.timePass() <= GameScreen.game.calculateTotalFallTime()) {
@@ -135,6 +139,12 @@ public class PlaySong implements JustinPlaySongInterface {
         PlaySong player = new PlaySong();
         player.play(audioFilePath);
     }
+    /**
+     * takes the volume from maingui
+     * creates arraylist of the different volumes -80 being mute, 6 being top volume
+     * sets the volume of the song and is called by Andrew's method in options
+     * Tyler
+     */
     public void updateVolume() {
     	int index = MainGUI.getVolume();
     
