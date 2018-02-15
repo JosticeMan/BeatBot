@@ -225,9 +225,9 @@ public class FightPaneG extends FullFunctionPane implements robotAct{
 		if(skin == "default")
 			rsrcFile = "resources/sprites/defaultSprite.bmp";
 		if(skin == "red")
-			rsrcFile = "resources/sprites/redSprite.png";
+			rsrcFile = "resources/sprites/redSprite_Transparent.png";
 		if(skin == "white")
-			rsrcFile = "resources/sprites/whiteSprite.png";
+			rsrcFile = "resources/sprites/whiteSprite_Transparent.png";
 		if(skin == "green")
 			rsrcFile = "resources/sprites/greenSprite.png";
 	}
