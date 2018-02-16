@@ -181,7 +181,9 @@ public class WavMusicBeatDetector {
     }
 	
     /**
-     * This method will use a beat detection algorithm's concept to detect beats 
+     * This method will use a beat detection algorithm's concept to detect beats <br />
+     * This algorithm consists of calculating the local average of the amplitude of a given frequency by using the amplitudes <br />
+     * around it. 
      * 
      * @param fluxes - The arraylist of fluxes
      * @param sensitivity - The sensitivity of the beat detection
