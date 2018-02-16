@@ -171,7 +171,7 @@ public class FightPaneG extends FullFunctionPane implements robotAct{
 		enemies.add(enemyCopy);
 		for(int i = 0; i < enemies.size(); i++)
 		{
-			//System.out.print(randX + ", " + randY);
+			System.out.print(randX + ", " + randY);
 			this.addObject(enemies.get(i));
 		}
 		
@@ -225,9 +225,9 @@ public class FightPaneG extends FullFunctionPane implements robotAct{
 		if(skin == "default")
 			rsrcFile = "resources/sprites/defaultSprite.bmp";
 		if(skin == "red")
-			rsrcFile = "resources/sprites/redSprite_Transparent.png";
+			rsrcFile = "resources/sprites/redSprite.png";
 		if(skin == "white")
-			rsrcFile = "resources/sprites/whiteSprite_Transparent.png";
+			rsrcFile = "resources/sprites/whiteSprite.png";
 		if(skin == "green")
 			rsrcFile = "resources/sprites/greenSprite.png";
 	}
