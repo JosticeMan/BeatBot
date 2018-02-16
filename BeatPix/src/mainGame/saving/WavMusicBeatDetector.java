@@ -158,7 +158,6 @@ public class WavMusicBeatDetector {
 	 * @return Returns the list of spectral fluxes of the audio file
 	 * @throws Exception 
 	 * 
-	 * @see https://stackoverflow.com/questions/17565269/calculate-fft-from-audio-file
 	 * @author Justin Yau
 	 */
     public List<Float> getSample() throws Exception {
@@ -365,6 +364,8 @@ public class WavMusicBeatDetector {
     	}
     	
     }
+    
+    @see https://stackoverflow.com/questions/17565269/calculate-fft-from-audio-file
     
     public int getSampleNumber(int sampleNumber) {
         if (sampleNumber < 0 || sampleNumber >= data.length / sampleSize) {
