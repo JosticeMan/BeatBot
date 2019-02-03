@@ -3,6 +3,8 @@
 AP CSA Group Create A Application Project <br />
 This repository will contain a Vertical Scrolling Rhythm Game that incorporates fighting aspects <br />
 
+![capture](https://user-images.githubusercontent.com/25600013/52171841-cf852100-2731-11e9-892a-6341ac3e94c1.PNG)
+
 # BeatBot:
 
   <p> In the distant future, the world has been taken over by dancing robots. You are one of the few humans left in the world 
