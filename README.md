@@ -5,7 +5,6 @@ This repository will contain a Vertical Scrolling Rhythm Game that incorporates 
 
 # BeatBot:
 
-  Possible BackStory: <br />
   <p> In the distant future, the world has been taken over by dancing robots. You are one of the few humans left in the world 
   that went into hiding following the robotic takeover. Your goal is to challenge these robots to fights and win.  
   Luckily, these robots allow their challengers to pick the beats, difficulty, and song, giving you the upperhand. 
